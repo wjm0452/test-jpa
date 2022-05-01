@@ -1,15 +1,23 @@
 package com.jhelper.jserve.web.entity;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @NoArgsConstructor
@@ -34,4 +42,7 @@ public class Org implements Serializable {
     private String lstUpdId;
     private String lstUpdDtm;
     private String lstUpdPgmId;
+
+    @OneToMany(mappedBy = "org", fetch = FetchType.LAZY)
+    private Set<User> users;
 }

@@ -3,7 +3,6 @@ package com.jhelper.jserve.web;
 import java.util.List;
 
 import com.jhelper.jserve.web.entity.User;
-import com.jhelper.jserve.web.user.UserRepository;
 import com.jhelper.jserve.web.user.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;

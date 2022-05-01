@@ -10,6 +10,7 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -46,7 +47,7 @@ public class User implements Serializable {
     private String lstUpdDtm;
     private String lstUpdPgmId;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "org_cd", referencedColumnName = "orgCd")
     private Org org;
 
