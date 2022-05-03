@@ -1,7 +1,6 @@
 package com.jhelper.jserve.web.entity;
 
-import java.io.Serializable;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -19,17 +18,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "TBSYS2001M")
-public class Org implements Serializable {
+@Table(name = "TBSYSZ003C")
+public class LrgclasCd {
     @Id
-    private String orgCd;
-    private String orgNm;
-    private long orgLvl;
-    private String prtsOrgCd;
-    private String bizDvcd;
-    private String orgKindDvcd;
-    private String orgPathNm;
-    private long srtSeq;
+    private String lrgclasCd;
+    private String lrgclasCdNm;
+    private String cdDv;
+    private String srtSeq;
+    private String memo;
     private String useYn;
     private String regId;
     private String regDtm;
@@ -38,6 +34,6 @@ public class Org implements Serializable {
     private String lstUpdDtm;
     private String lstUpdPgmId;
 
-    @OneToMany(mappedBy = "org", fetch = FetchType.LAZY)
-    private Set<User> users;
+    @OneToMany(mappedBy = "lrgclasCd", fetch = FetchType.LAZY)
+    private List<SmlclasCd> smlclasCds;
 }
