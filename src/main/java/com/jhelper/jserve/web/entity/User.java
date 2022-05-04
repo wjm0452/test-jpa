@@ -10,7 +10,6 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

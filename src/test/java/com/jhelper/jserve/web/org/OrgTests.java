@@ -7,7 +7,6 @@ import java.util.List;
 
 import com.jhelper.jserve.web.entity.Org;
 
-import org.assertj.core.api.Assertions;
 import org.hibernate.LazyInitializationException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,13 +29,27 @@ public class OrgTests {
 
     @Test
     void orgAndUsers() {
-        Org org = orgService.getOrg("101010");
-        assertThat(org.getOrgCd()).isEqualTo("101010");
-        assertThat(org.getUsers()).size().isGreaterThan(0);
+        Org org = orgService.getOrg("1010");
+        assertThat(org.getOrgCd()).isEqualTo("1010");
+        assertThat(org.getUsers()).size().isEqualTo(0);
     }
 
     @Test
-    void orgAndUsers2() {
+    void notContainsUsers() {
+        List<Org> orgs = orgService.getAllWithUsers("1010");
+        assertThat(orgs).size().isEqualTo(1);
+        assertThat(orgs.get(0).getUsers()).size().isEqualTo(0);
+    }
+
+    @Test
+    void orgs() {
+        List<Org> orgs = orgService.getAllWithUsers("101010");
+        assertThat(orgs).size().isEqualTo(1);
+        assertThat(orgs.get(0).getUsers()).size().isGreaterThan(0);
+    }
+
+    @Test
+    void orgsByOrg() {
         List<Org> orgs = orgService.getAllWithUsers(Org.builder().orgCd("101010").build());
         assertThat(orgs).size().isEqualTo(1);
         assertThat(orgs.get(0).getUsers()).size().isGreaterThan(0);

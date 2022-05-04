@@ -26,6 +26,10 @@ public class OrgService {
         return orgRepository.findById(orgCd).get();
     }
 
+    public List<Org> getAllWithUsers(String orgCd) {
+        return orgRepository.findAllWithUsers(orgCd);
+    }
+
     public List<Org> getAllWithUsers(Org org) {
         return orgRepository.findAllWithUsers(org);
     }

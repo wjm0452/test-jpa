@@ -20,7 +20,7 @@ public interface OrgRepository extends JpaRepository<Org, String> {
             "where o.orgCd = :orgCd")
     List<Org> findAllWithUsers(@Param("orgCd") String orgCd);
 
-    @Query("select o " +
+    @Query("select distinct o " +
             "from Org o " +
             "join fetch o.users " +
             "where o.orgCd = :#{#org.orgCd}")
