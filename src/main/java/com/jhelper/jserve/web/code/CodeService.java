@@ -21,15 +21,15 @@ public class CodeService {
     @Autowired
     SmallCodeRepository smallCodeRepository;
 
-    public List<LrgclasCd> findLargeCodes() {
+    public List<LrgclasCd> getLargeCodes() {
         return largeCodeRepository.findAll();
     }
 
-    public LrgclasCd findLargeCode(String lrgclasCd) {
+    public LrgclasCd getLargeCode(String lrgclasCd) {
         return largeCodeRepository.findById(lrgclasCd).orElse(null);
     }
 
-    public List<LrgclasCd> findLargeCodes(LrgclasCd largeCode) {
+    public List<LrgclasCd> getLargeCodes(LrgclasCd largeCode) {
 
         ExampleMatcher exampleMatcher = ExampleMatcher.matching()
                 .withMatcher("lrgclasCd", ExampleMatcher.GenericPropertyMatchers.ignoreCase())
@@ -38,7 +38,7 @@ public class CodeService {
         return largeCodeRepository.findAll(Example.of(largeCode, exampleMatcher));
     }
 
-    public List<SmlclasCd> findSmallCodes(String lrgclasCd) {
+    public List<SmlclasCd> getSmallCodes(String lrgclasCd) {
         return smallCodeRepository.findAll(
                 Example.of(
                         SmlclasCd.builder()
@@ -49,12 +49,12 @@ public class CodeService {
                                 .build()));
     }
 
-    public SmlclasCd findSmallCode(String lrgclasCd, String smlclasCd) {
+    public SmlclasCd getSmallCode(String lrgclasCd, String smlclasCd) {
         SmlclasCdId smallCodeID = SmlclasCdId.builder().lrgclasCd(lrgclasCd).smlclasCd(smlclasCd).build();
         return smallCodeRepository.findById(smallCodeID).orElse(null);
     }
 
-    public List<LrgclasCd> findCodes(String... lrgclasCds) {
+    public List<LrgclasCd> getCodes(String... lrgclasCds) {
         return largeCodeRepository.findAllById(Arrays.asList(lrgclasCds));
     }
 }

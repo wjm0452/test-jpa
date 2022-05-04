@@ -14,7 +14,7 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public List<User> findAll() {
+    public List<User> getUsers() {
         List<User> users = userRepository.findAll();
         users.stream().forEach(user -> {
             Org org = user.getOrg();
@@ -25,7 +25,7 @@ public class UserService {
         return null;
     }
 
-    public User findById(String id) {
+    public User getUser(String id) {
         return userRepository.findById(id).orElse(null);
     }
 }

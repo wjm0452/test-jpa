@@ -20,16 +20,16 @@ public class UserController {
 
     @GetMapping
     public List<User> allUsers() {
-        return userService.findAll();
+        return userService.getUsers();
     }
 
     @GetMapping("/{userId}")
     public User user(@PathVariable String userId) {
-        return userService.findById(userId);
+        return userService.getUser(userId);
     }
 
     @GetMapping("/{userId}/photo")
     public User userPhoto(@PathVariable String userId) {
-        return userService.findById(userId);
+        return userService.getUser(userId);
     }
 }

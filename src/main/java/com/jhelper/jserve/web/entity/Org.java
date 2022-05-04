@@ -1,6 +1,7 @@
 package com.jhelper.jserve.web.entity;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -39,5 +40,5 @@ public class Org implements Serializable {
     private String lstUpdPgmId;
 
     @OneToMany(mappedBy = "org", fetch = FetchType.LAZY)
-    private Set<User> users;
+    private List<User> users;
 }
