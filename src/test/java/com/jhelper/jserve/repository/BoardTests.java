@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 import com.jhelper.jserve.web.entity.User;
+import com.querydsl.core.types.ExpressionUtils;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.core.types.dsl.PathBuilder;
 import com.querydsl.core.types.dsl.PathBuilderFactory;
@@ -41,14 +42,17 @@ public class BoardTests {
         PathBuilder<User> user = pathBuilderFactory.create(User.class);
 
         BooleanExpression idExpr = user.get("usrId").eq("SADMIN");
-        BooleanExpression nameExpr = user.get("usrNm").eq("고도화 관리자");
+        BooleanExpression nameExpr = user.get("usrNm").eq("고도화 2관리자");
+        BooleanExpression useExpr = user.get("useYn").eq("Y");
 
         assertThat(
                 jpaQueryFactory
                         .selectFrom(user)
                         .rightJoin(user.get("org"))
                         .fetchJoin()
-                        .where(idExpr.and(nameExpr))
+                        .where(
+                                idExpr.or(nameExpr),
+                                useExpr)
                         .fetch())
                 .size()
                 .isEqualTo(1);
