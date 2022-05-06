@@ -73,6 +73,9 @@ public class CodeTests {
 
         // small code
         assertThat(codeService.getSmallCode("ORG_KIND_DVCD", "CENTERABCD")).isNull();
+
+        // small code meta
+        assertThat(codeService.getSmallCode("ORG_KIND_DVCD", "CENTER").getRegId()).isNotNull();
     }
 
     @Transactional(readOnly = true)

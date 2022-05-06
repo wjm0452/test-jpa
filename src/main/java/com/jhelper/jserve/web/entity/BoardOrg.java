@@ -1,6 +1,5 @@
 package com.jhelper.jserve.web.entity;
 
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -19,19 +18,21 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "TBSYSZ004C")
-@IdClass(SmlclasCdId.class)
-public class SmlclasCd extends BaseEntity {
+@Table(name = "TBCOM2011M")
+@IdClass(BoardOrgId.class)
+public class BoardOrg extends BaseEntity {
 
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "lrgclas_cd", referencedColumnName = "lrgclasCd")
-    private LrgclasCd lrgclasCd;
+    @JoinColumn(name = "blbd_id", referencedColumnName = "blbdId")
+    private Board blbdId;
 
     @Id
-    private String smlclasCd;
-    private String smlclasCdNm;
-    private String srtSeq;
-    private String memo;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "org_cd", referencedColumnName = "orgCd")
+    private Org orgCd;
+
+    private String blthgWrtgPosbYn;
+    private String orgPrscntAllIclsYn;
     private String useYn;
 }

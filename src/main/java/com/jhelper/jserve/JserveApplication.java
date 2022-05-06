@@ -9,4 +9,5 @@ public class JserveApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(JserveApplication.class, args);
 	}
+
 }

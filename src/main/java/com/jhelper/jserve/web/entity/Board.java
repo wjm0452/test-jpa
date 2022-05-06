@@ -1,9 +1,11 @@
 package com.jhelper.jserve.web.entity;
 
-import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -17,7 +19,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @Entity
 @Table(name = "TBCOM2010M")
-public class Board implements Serializable {
+public class Board extends BaseEntity {
     @Id
     private String blbdId;
     private String blbdDvcd;
@@ -31,10 +33,7 @@ public class Board implements Serializable {
     private String pfcUseYn;
     private String clsdDispYn;
     private String replyPmssYn;
-    private String regId;
-    private String regDtm;
-    private String regPgmId;
-    private String lstUpdId;
-    private String lstUpdDtm;
-    private String lstUpdPgmId;
+
+    @OneToMany(mappedBy = "blbdId", fetch = FetchType.LAZY)
+    private List<BoardOrg> boardOrgs;
 }

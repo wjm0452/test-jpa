@@ -2,6 +2,7 @@ package com.jhelper.jserve.web.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -21,7 +22,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @Entity
 @Table(name = "TBSYS2002M")
-public class User implements Serializable {
+public class User extends BaseEntity {
 
     @Id
     private String usrId;
@@ -39,12 +40,6 @@ public class User implements Serializable {
 
     @Lob
     private String poto;
-    private String regId;
-    private String regDtm;
-    private String regPgmId;
-    private String lstUpdId;
-    private String lstUpdDtm;
-    private String lstUpdPgmId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "org_cd", referencedColumnName = "orgCd")

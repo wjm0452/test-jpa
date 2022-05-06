@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @Entity
 @Table(name = "TBSYSZ003C")
-public class LrgclasCd {
+public class LrgclasCd extends BaseEntity {
     @Id
     private String lrgclasCd;
     private String lrgclasCdNm;
@@ -27,12 +27,6 @@ public class LrgclasCd {
     private String srtSeq;
     private String memo;
     private String useYn;
-    private String regId;
-    private String regDtm;
-    private String regPgmId;
-    private String lstUpdId;
-    private String lstUpdDtm;
-    private String lstUpdPgmId;
 
     @OneToMany(mappedBy = "lrgclasCd", fetch = FetchType.LAZY)
     private List<SmlclasCd> smlclasCds;

@@ -3,6 +3,7 @@ package com.jhelper.jserve.web.entity;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -20,7 +21,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @Entity
 @Table(name = "TBSYS2001M")
-public class Org implements Serializable {
+public class Org extends BaseEntity {
     @Id
     private String orgCd;
     private String orgNm;
@@ -31,12 +32,6 @@ public class Org implements Serializable {
     private String orgPathNm;
     private long srtSeq;
     private String useYn;
-    private String regId;
-    private String regDtm;
-    private String regPgmId;
-    private String lstUpdId;
-    private String lstUpdDtm;
-    private String lstUpdPgmId;
 
     @OneToMany(mappedBy = "org", fetch = FetchType.LAZY)
     private List<User> users;
