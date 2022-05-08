@@ -25,7 +25,6 @@ dependencies {
 	implementation 'org.springframework.session:spring-session-core'
 	implementation 'org.xerial:sqlite-jdbc:3.36.0.3'
 	implementation 'com.oracle.ojdbc:ojdbc8:19.3.0.0'
-	compileOnly 'com.querydsl:querydsl-core'
     compileOnly 'com.querydsl:querydsl-jpa'
 	compileOnly 'com.querydsl:querydsl-apt'
 	compileOnly 'org.projectlombok:lombok'

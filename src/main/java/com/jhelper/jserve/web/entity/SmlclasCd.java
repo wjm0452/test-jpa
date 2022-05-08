@@ -1,6 +1,8 @@
 package com.jhelper.jserve.web.entity;
 
-import javax.persistence.Embedded;
+import java.io.Serializable;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -20,18 +22,28 @@ import lombok.NoArgsConstructor;
 @Builder
 @Entity
 @Table(name = "TBSYSZ004C")
-@IdClass(SmlclasCdId.class)
+@IdClass(SmlclasCd.PK.class)
 public class SmlclasCd extends BaseEntity {
 
     @Id
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "lrgclas_cd", referencedColumnName = "lrgclasCd")
     private LrgclasCd lrgclasCd;
 
     @Id
     private String smlclasCd;
+
     private String smlclasCdNm;
-    private String srtSeq;
+    private Integer srtSeq;
     private String memo;
     private String useYn;
+
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
+    static public class PK implements Serializable {
+        private String lrgclasCd;
+        private String smlclasCd;
+    }
 }
