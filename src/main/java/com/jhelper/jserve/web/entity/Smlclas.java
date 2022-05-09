@@ -3,12 +3,16 @@ package com.jhelper.jserve.web.entity;
 import java.io.Serializable;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -22,13 +26,11 @@ import lombok.NoArgsConstructor;
 @Builder
 @Entity
 @Table(name = "TBSYSZ004C")
-@IdClass(SmlclasCd.PK.class)
-public class SmlclasCd extends BaseEntity {
+@IdClass(Smlclas.PK.class)
+public class Smlclas extends BaseEntity {
 
     @Id
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "lrgclas_cd", referencedColumnName = "lrgclasCd")
-    private LrgclasCd lrgclasCd;
+    private String lrgclasCd;
 
     @Id
     private String smlclasCd;
@@ -38,10 +40,14 @@ public class SmlclasCd extends BaseEntity {
     private String memo;
     private String useYn;
 
+    @MapsId("lrgclasCd")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "lrgclasCd")
+    private Lrgclas lrgclas;
+
     @Data
-    @NoArgsConstructor
     @AllArgsConstructor
-    @Builder
+    @NoArgsConstructor
     static public class PK implements Serializable {
         private String lrgclasCd;
         private String smlclasCd;
