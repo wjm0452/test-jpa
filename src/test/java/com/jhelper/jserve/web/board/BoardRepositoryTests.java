@@ -9,6 +9,7 @@ import com.jhelper.jserve.web.dto.BoardAdmin2Dto;
 import com.jhelper.jserve.web.dto.BoardAdminDto;
 import com.jhelper.jserve.web.entity.Board;
 import com.jhelper.jserve.web.entity.BoardAdmin;
+import com.querydsl.core.Tuple;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -19,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import lombok.extern.slf4j.Slf4j;
 
-@Transactional
+// @Transactional
 @SpringBootTest
 @Slf4j
 public class BoardRepositoryTests {
@@ -27,7 +28,7 @@ public class BoardRepositoryTests {
     @Autowired
     BoardRepository boardRepository;
 
-    @BeforeEach
+    // @BeforeEach
     void before() {
 
         Board board = Board.builder()
@@ -111,9 +112,23 @@ public class BoardRepositoryTests {
     @DisplayName("getBoardAdmin2")
     @Test
     void getBoardAdmin2() {
-        List<BoardAdmin2Dto> boardAdmins = boardRepository.findBoardAdmin2("M_TEST01",BoardAdmin2Dto.class);
+        List<BoardAdmin2Dto> boardAdmins = boardRepository.findBoardAdmin2("M_TEST01", BoardAdmin2Dto.class);
         assertThat(boardAdmins).hasSize(2);
 
         assertThat(boardAdmins.get(0).getBlbdId()).isNotNull();
+    }
+
+    @DisplayName("queryDsl")
+    @Test
+    void queryDsl() {
+        List<Tuple> boardAdmins = boardRepository.findQuery();
+        assertThat(boardAdmins).hasSize(4);
+    }
+
+    @DisplayName("queryDsl2")
+    @Test
+    void queryDsl2() {
+        List<Tuple> boardAdmins = boardRepository.findQuery2();
+        assertThat(boardAdmins).hasSize(2);
     }
 }

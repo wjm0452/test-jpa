@@ -16,6 +16,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Setter
 @Getter
@@ -39,16 +40,19 @@ public class Board extends BaseEntity {
     private String clsdDispYn;
     private String replyPmssYn;
 
+    @ToString.Exclude
     @MapsId("blbdId")
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "blbdId")
     private List<BoardOrg> boardOrgs;
 
+    @ToString.Exclude
     @MapsId("blbdId")
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "blbdId")
     private List<BoardHeader> boaredHeaders;
 
+    @ToString.Exclude
     @MapsId("blbdId")
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "blbdId")
