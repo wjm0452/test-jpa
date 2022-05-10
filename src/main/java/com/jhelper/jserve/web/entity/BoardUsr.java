@@ -20,9 +20,9 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "TBCOM2011M")
-@IdClass(BoardOrg.PK.class)
-public class BoardOrg extends BaseEntity {
+@Table(name = "TBCOM2012M")
+@IdClass(BoardUsr.PK.class)
+public class BoardUsr {
 
     @Id
     private String blbdId;
@@ -30,16 +30,17 @@ public class BoardOrg extends BaseEntity {
     @Id
     private String orgCd;
 
-    private String blthgWrtgPosbYn;
-    private String orgPrscntAllIclsYn;
+    @Id
+    private String usrId;
+
     private String useYn;
 
     @Data
-    @NoArgsConstructor
     @AllArgsConstructor
-    @Builder
+    @NoArgsConstructor
     static public class PK implements Serializable {
         private String blbdId;
         private String orgCd;
+        private String usrId;
     }
 }

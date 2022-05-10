@@ -1,18 +1,24 @@
 select
-    smlclascd0_.lrgclas_cd as lrgclas_cd1_5_0_,
-    smlclascd0_.smlclas_cd as smlclas_cd2_5_0_,
-    smlclascd0_.lst_upd_dtm as lst_upd_dtm3_5_0_,
-    smlclascd0_.lst_upd_id as lst_upd_id4_5_0_,
-    smlclascd0_.lst_upd_pgm_id as lst_upd_pgm_id5_5_0_,
-    smlclascd0_.reg_dtm as reg_dtm6_5_0_,
-    smlclascd0_.reg_id as reg_id7_5_0_,
-    smlclascd0_.reg_pgm_id as reg_pgm_id8_5_0_,
-    smlclascd0_.memo as memo9_5_0_,
-    smlclascd0_.smlclas_cd_nm as smlclas_cd_nm10_5_0_,
-    smlclascd0_.srt_seq as srt_seq11_5_0_,
-    smlclascd0_.use_yn as use_yn12_5_0_
+    board0_.blbd_id as blbd_id1_0_,
+    board0_.lst_upd_dtm as lst_upd_dtm2_0_,
+    board0_.lst_upd_id as lst_upd_id3_0_,
+    board0_.lst_upd_pgm_id as lst_upd_pgm_id4_0_,
+    board0_.reg_dtm as reg_dtm5_0_,
+    board0_.reg_id as reg_id6_0_,
+    board0_.reg_pgm_id as reg_pgm_id7_0_,
+    board0_.all_org_rlse_yn as all_org_rlse_yn8_0_,
+    board0_.blbd_desc as blbd_desc9_0_,
+    board0_.blbd_dvcd as blbd_dvcd10_0_,
+    board0_.blbd_nm as blbd_nm11_0_,
+    board0_.blbd_rlse_yn as blbd_rlse_yn12_0_,
+    board0_.blbd_use_yn as blbd_use_yn13_0_,
+    board0_.blthg_alrm_use_yn as blthg_alrm_use_yn14_0_,
+    board0_.clsd_disp_yn as clsd_disp_yn15_0_,
+    board0_.pfc_use_yn as pfc_use_yn16_0_,
+    board0_.reply_pmss_yn as reply_pmss_yn17_0_,
+    board0_.srt_seq as srt_seq18_0_
 from
-    tbsysz004c smlclascd0_
-where
-    smlclascd0_.lrgclas_cd = ?
-    and smlclascd0_.smlclas_cd = ?
+    tbcom2010m board0_
+    left outer join tbcom2011m boardorgs1_ on board0_.blbd_id = boardorgs1_.blbd_id
+    left outer join tbcom2014m boaredhead2_ on board0_.blbd_id = boaredhead2_.blbd_id
+    left outer join tbcom2013m boardadmin3_ on board0_.blbd_id = boardadmin3_.blbd_id

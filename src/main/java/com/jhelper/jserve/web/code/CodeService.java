@@ -37,8 +37,10 @@ public class CodeService {
                 .withMatcher("useYn", ignoreCase())
                 .withMatcher("cdDv", caseSensitive());
 
-        return largeCodeRepository.findAll(Example.of(lrgclas, exampleMatcher)).stream()
-                .map(l -> LargeCodeDto.build(l)).collect(Collectors.toList());
+        return largeCodeRepository.findAll(Example.of(lrgclas, exampleMatcher))
+                .stream()
+                .map(l -> LargeCodeDto.build(l))
+                .collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)

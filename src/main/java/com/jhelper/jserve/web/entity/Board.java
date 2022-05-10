@@ -2,18 +2,23 @@ package com.jhelper.jserve.web.entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -24,7 +29,7 @@ public class Board extends BaseEntity {
     private String blbdId;
     private String blbdDvcd;
     private String blbdNm;
-    private int srtSeq;
+    private Integer srtSeq;
     private String blbdDesc;
     private String blbdUseYn;
     private String allOrgRlseYn;
@@ -34,6 +39,18 @@ public class Board extends BaseEntity {
     private String clsdDispYn;
     private String replyPmssYn;
 
-    @OneToMany(mappedBy = "blbdId", fetch = FetchType.LAZY)
+    @MapsId("blbdId")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "blbdId")
     private List<BoardOrg> boardOrgs;
+
+    @MapsId("blbdId")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "blbdId")
+    private List<BoardHeader> boaredHeaders;
+
+    @MapsId("blbdId")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "blbdId")
+    private List<BoardAdmin> boardAdmins;
 }
