@@ -1,22 +1,22 @@
 package com.jhelper.jserve.web.entity;
 
-import java.io.Serializable;
-
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -29,9 +29,9 @@ public class User extends BaseEntity {
     private String pw;
     private String useYn;
     private String usrRoleId;
-
+    private String orgCd;
     private String lginYn;
-    private int lginTryTcnt;
+    private Integer lginTryTcnt;
     private String pwUpdDtm;
     private String usrNm;
     private String mbphNo;
@@ -41,8 +41,9 @@ public class User extends BaseEntity {
     @Lob
     private String poto;
 
+    @MapsId("orgCd")
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "org_cd", referencedColumnName = "orgCd")
+    @JoinColumn(name = "orgCd")
     private Org org;
 
 }

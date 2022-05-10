@@ -6,32 +6,37 @@ import java.util.Optional;
 import com.jhelper.jserve.web.entity.User;
 
 import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, String> {
 
+    @EntityGraph(attributePaths = "org")
     @Override
-    @EntityGraph(attributePaths = { "org" })
     Optional<User> findById(String id);
 
     @Override
-    @EntityGraph(attributePaths = { "org" })
-    <S extends User> Optional<S> findOne(Example<S> example);
+    @EntityGraph(attributePaths = "org")
+    List<User> findAllById(Iterable<String> ids);
 
-    @Query("select u " +
-            "from User u " +
-            "left join fetch u.org o")
     @Override
+    @EntityGraph(attributePaths = "org")
+    List<User> findAll();
+
+    @Override
+    @EntityGraph(attributePaths = "org")
     <S extends User> List<S> findAll(Example<S> example);
 
-    @Query("select u " +
-            "from User u " +
-            "join fetch u.org o " +
-            "where u.usrNm like '%' || :name || '%' or o.orgNm like :name || '%'")
-    List<User> findAllByName(@Param("name") String name);
+    @Override
+    @EntityGraph(attributePaths = "org")
+    <S extends User> Page<S> findAll(Example<S> example, Pageable pageable);
+
+    @Override
+    @EntityGraph(attributePaths = "org")
+    <S extends User> List<S> findAll(Example<S> example, Sort sort);
 }

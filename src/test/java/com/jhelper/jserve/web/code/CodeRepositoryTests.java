@@ -48,8 +48,8 @@ public class CodeRepositoryTests {
 
         lrgclasCds.forEach(lrgclasCd -> {
             List<Smlclas> smlclasCds = makeSmallCodes(lrgclasCd.getLrgclasCd());
-            lrgclasCd.getSmlclass().addAll(smlclasCds); // cascade 설정했을때 일때
-            // smallCodeRepository.saveAll(smlclasCds);
+            lrgclasCd.getSmlclass().addAll(smlclasCds); // cascade 설정했을때 largeCode save시 자동으로 같이 저장한다.
+            // lrgclasCd.getSmlclass().addAll( smallCodeRepository.saveAll(smlclasCds) );
         });
 
         /*
@@ -60,9 +60,9 @@ public class CodeRepositoryTests {
          * largeCode.addAll(smallCodes)
          * largeCode = largeRepository.save(largeCode); // smallCode 까지 모두 저장함
          * 2. cascade 설정이 안할경우
-         * smallReposory.saveAll(smallCodes);
-         * laregeCode = largeRepository.save(largeCode); // 반환받은 largeCode에 smallCodes가
-         * 들어있음
+         * smallCodes = smallReposory.saveAll(smallCodes);
+         * largeCode.getSmlclass().addAll(smallCodes);
+         * laregeCode = largeRepository.save(largeCode);
          */
         lrgclasCds = largeCodeRepository.saveAll(lrgclasCds);
     }

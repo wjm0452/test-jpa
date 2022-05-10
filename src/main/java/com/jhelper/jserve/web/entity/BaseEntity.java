@@ -52,8 +52,8 @@ public abstract class BaseEntity implements Serializable {
 
     @PreUpdate
     public void preUpdate() {
-        lstUpdId = "system";
+        lstUpdId = "update";
         lstUpdDtm = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
-        lstUpdPgmId = "system";
+        lstUpdPgmId = "update";
     }
 }

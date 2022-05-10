@@ -41,6 +41,7 @@ public class CodeServiceTests {
                         .lrgclasCdNm(largeName)
                         .srtSeq(1)
                         .cdDv("SYS")
+                        .useYn("Y")
                         .memo("대분류코드")
                         .build());
 
@@ -53,6 +54,7 @@ public class CodeServiceTests {
                         .lrgclasCdNm(largeName)
                         .srtSeq(1)
                         .cdDv("SYS")
+                        .useYn("Y")
                         .memo("대분류코드")
                         .build());
 
@@ -71,6 +73,7 @@ public class CodeServiceTests {
                         .smlclasCd(smallCode)
                         .smlclasCdNm(smallName)
                         .srtSeq(1)
+                        .useYn("Y")
                         .memo("소분류코드")
                         .build());
 
@@ -84,6 +87,7 @@ public class CodeServiceTests {
                         .smlclasCd(smallCode)
                         .smlclasCdNm(smallName)
                         .srtSeq(1)
+                        .useYn("Y")
                         .memo("소분류코드")
                         .build());
 
