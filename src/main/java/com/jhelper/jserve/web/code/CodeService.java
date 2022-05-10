@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class CodeService {
@@ -25,6 +26,7 @@ public class CodeService {
     @Autowired
     SmallCodeRepository smallCodeRepository;
 
+    @Transactional(readOnly = true)
     public List<LargeCodeDto> getLargeCodes(LargeCodeDto largeCodeDto) {
 
         Lrgclas lrgclas = largeCodeDto.toEntity();
@@ -39,6 +41,7 @@ public class CodeService {
                 .map(l -> LargeCodeDto.build(l)).collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
     public LargeCodeDto getLargeCode(String largeCode) {
         Lrgclas lrgclas = largeCodeRepository.findById(largeCode).orElse(null);
 
@@ -49,6 +52,7 @@ public class CodeService {
         return LargeCodeDto.build(lrgclas);
     }
 
+    @Transactional(readOnly = true)
     public List<SmallCodeDto> getSmallCodes(String largeCode) {
         return smallCodeRepository.findAllByLrgclasCd(largeCode).stream().map(lrgclas -> {
             return SmallCodeDto.build(lrgclas);
@@ -65,22 +69,27 @@ public class CodeService {
         return SmallCodeDto.build(smlclas);
     }
 
+    @Transactional
     public LargeCodeDto setLargeCode(LargeCodeDto largeCodeDto) {
         return LargeCodeDto.build(largeCodeRepository.save(largeCodeDto.toEntity()));
     }
 
+    @Transactional
     public SmallCodeDto setSmallCode(SmallCodeDto smallCodeDto) {
         return SmallCodeDto.build(smallCodeRepository.save(smallCodeDto.toEntity()));
     }
 
+    @Transactional
     public void deleteLargeCode(String largeCode) {
         largeCodeRepository.deleteById(largeCode);
     }
 
+    @Transactional
     public void deleteSmallCode(String largeCode, String smallCode) {
         smallCodeRepository.deleteById(new Smlclas.PK(largeCode, smallCode));
     }
 
+    @Transactional(readOnly = true)
     public List<LargeCodeDto> getCodes(String... codes) {
         return largeCodeRepository.findAllById(Arrays.asList(codes)).stream().map(lrgclas -> {
             LargeCodeDto largeCodeDto = LargeCodeDto.build(lrgclas);
