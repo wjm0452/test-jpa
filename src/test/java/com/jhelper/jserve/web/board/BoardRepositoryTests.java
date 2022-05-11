@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import lombok.extern.slf4j.Slf4j;
 
-// @Transactional
+@Transactional
 @SpringBootTest
 @Slf4j
 public class BoardRepositoryTests {
@@ -28,7 +28,7 @@ public class BoardRepositoryTests {
     @Autowired
     BoardRepository boardRepository;
 
-    // @BeforeEach
+    @BeforeEach
     void before() {
 
         Board board = Board.builder()
@@ -129,6 +129,6 @@ public class BoardRepositoryTests {
     @Test
     void queryDsl2() {
         List<Tuple> boardAdmins = boardRepository.findQuery2();
-        assertThat(boardAdmins).hasSize(2);
+        assertThat(boardAdmins).hasSize(4);
     }
 }
