@@ -105,4 +105,10 @@ public class CodeService {
             return largeCodeDto;
         }).collect(Collectors.toList());
     }
+
+    @Transactional
+    public void updateMemo(String largeCode, String smallCode, String memo) {
+        Smlclas smlclas = smallCodeRepository.findById(new Smlclas.PK(largeCode, smallCode)).get();
+        smlclas.setMemo(memo);
+    }
 }

@@ -170,4 +170,11 @@ public class CodeServiceTests {
                 .hasSize(2);
     }
 
+    @Test
+    @DisplayName("update memo")
+    void updateMemo() {
+        codeService.updateMemo("WWW01", "WWW01_S_01", "Test");
+        codeService.updateMemo("WWW01", "WWW01_S_02", "Test2");
+    }
+
 }
