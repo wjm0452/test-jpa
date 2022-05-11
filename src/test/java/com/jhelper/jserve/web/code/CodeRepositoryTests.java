@@ -1,8 +1,10 @@
 package com.jhelper.jserve.web.code;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -138,6 +140,19 @@ public class CodeRepositoryTests {
                 .orElse(null);
 
         checkEntity(code);
+
+        Smlclas newCode = Smlclas.builder()
+                .lrgclasCd(code.getLrgclasCd())
+                .smlclasCd(code.getSmlclasCd())
+                .smlclasCdNm(code.getSmlclasCdNm())
+                .srtSeq(1)
+                .memo("test")
+                .build();
+
+        newCode = smallCodeRepository.save(newCode);
+
+        assertTrue(code == newCode); // 다른 객체를 생성해서 업데이트해도 동일 데이터가 동기화 되었다.
+        assertThat(code.getMemo()).isEqualTo("test");
 
         log.info("find small codes");
         List<Smlclas> codes = smallCodeRepository.findAllByLrgclasCd("WWW01");
