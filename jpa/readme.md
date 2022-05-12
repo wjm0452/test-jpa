@@ -28,11 +28,11 @@ public class Lrgclas extends BaseEntity  {
     private List<Smlclas> smlclass;
 }
 ```
-| property | description |
-| -------- | ----------- |
-| @Entity  | 데이터베이스의 테이블과 매핑 |
+| property | description                                                              |
+| -------- | ------------------------------------------------------------------------ |
+| @Entity  | 데이터베이스의 테이블과 매핑                                             |
 | @Table   | 매핑할 테이블 이름 지정 하며 생략 가능하다.(생략시 엔티티 이름으로 매핑) |
-| @Id      | PK를 지정 |
+| @Id      | PK를 지정                                                                |
 
 복합키 일경우 아래와 같이 작성 합니다.
  ```java
@@ -153,17 +153,16 @@ where
     smlclas0_.smlclas_cd_nm like ? escape ?
 ```
 
-## 4. Join
-Entity 간 상호 Join을 지정할지 여부에 따라 아래 Join 방법을 선택합니다.
+## 4. 연관관계 설정(Join)
+Entity간 연관관계를 어떻게 지정할지 여부에 따라 아래 연관관계 방법을 선택합니다.
 
-| Join | Description |
-| ---- | -------- |
+| Join   | Description                                                                     |
+| ------ | ------------------------------------------------------------------------------- |
 | 단방향 | 한쪽 Entity에서만 Join 대상을 지정, 지정한 Entity에서만 대상 Entity로 접근 가능 |
-| 양방향 | 양쪽 모두 Entity에 Join 대상을 지정 |
+| 양방향 | 양쪽 모두 Entity에 Join 대상을 지정                                             |
 
-### 4.1. 단방향 Join
-한쪽 Entity에서만 설정하는 방법
-@JoinColumn을 사용하여 Entity를 지정합니다.
+### 4.1. 단방향 연관관계
+한쪽 Entity에서만 관계를 설정하는 방법
 ```java
 @Entity
 @Table(name = "TBCOM2010M")
@@ -201,9 +200,10 @@ public class Board extends BaseEntity {
     private List<BoardAdmin> boardAdmins;
 }
 ```
+@JoinColumn을 사용하여 연관 대상 Entity를 지정합니다.
 
-### 4.2. 양방향 Join
-상호 참조되는 Entity 모두에 설정하는 방법
+### 4.2. 양방향 연관관계
+상호 Entity 모두에 관계를 설정하는 방법
 ```java
 @Entity
 @Table(name = "TBSYSZ003C")
