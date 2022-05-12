@@ -173,8 +173,8 @@ public class CodeServiceTests {
     @Test
     @DisplayName("update memo")
     void updateMemo() {
-        codeService.updateMemo("WWW01", "WWW01_S_01", "Test");
-        codeService.updateMemo("WWW01", "WWW01_S_02", "Test2");
+        codeService.updateMemo("M_TEST01", "M_TEST01_S01", "Test");
+        codeService.updateMemo("M_TEST01", "M_TEST01_S02", "Test2");
     }
 
 }

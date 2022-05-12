@@ -42,7 +42,7 @@ public class OrgHistoryRepositoryTests {
         orgHistory.setOrgNm("SEIZE");
         List<Tuple> histories = orgHistoryRepository.findAll2(orgHistory);
 
-        assertThat(histories).isNotNull().size().isGreaterThan(0);
+        assertThat(histories).isNotNull();
     }
 
     @Test
@@ -50,6 +50,6 @@ public class OrgHistoryRepositoryTests {
 
         List<Tuple> histories = orgHistoryRepository.findOrgCdAndChangedCount();
 
-        assertThat(histories).isNotNull().size().isGreaterThan(0);
+        assertThat(histories).isNotNull();
     }
 }
