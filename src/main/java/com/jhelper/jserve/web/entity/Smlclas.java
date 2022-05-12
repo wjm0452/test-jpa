@@ -44,7 +44,7 @@ public class Smlclas extends BaseEntity {
     private String useYn;
 
     @MapsId("lrgclasCd")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "lrgclasCd")
     private Lrgclas lrgclas;
 

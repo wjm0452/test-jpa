@@ -45,11 +45,6 @@ public class OrgHistory {
     private String srtSeq;
     private String useYn;
 
-    @MapsId("orgCd")
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "orgCd")
-    private Org org;
-
     @Data
     @AllArgsConstructor
     @NoArgsConstructor

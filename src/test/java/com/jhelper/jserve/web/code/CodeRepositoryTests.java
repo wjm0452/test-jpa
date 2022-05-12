@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.jhelper.jserve.web.dto.LargeCodeDto;
 import com.jhelper.jserve.web.entity.Lrgclas;
 import com.jhelper.jserve.web.entity.Smlclas;
 
@@ -19,6 +20,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.extern.slf4j.Slf4j;
@@ -208,4 +212,48 @@ public class CodeRepositoryTests {
         assertNotNull(lrgclas.getSrtSeq());
     }
 
+    @Test
+    void findById() {
+        List<Smlclas> codes = smallCodeRepository.findAll();
+        Smlclas code = smallCodeRepository.findById(new Smlclas.PK("WWW01", "WWW01_S_01")).orElseGet(null);
+
+        assertThat(codes).isNotNull().size().isGreaterThan(0);
+        assertThat(code).isNotNull();
+    }
+
+    @Test
+    void exampleOf() {
+        Smlclas smclasCondition = new Smlclas();
+        smclasCondition.setLrgclasCd("WWW01");
+
+        List<Smlclas> codes = smallCodeRepository.findAll(Example.of(smclasCondition));
+        assertThat(codes).isNotNull().size().isGreaterThan(0);
+    }
+
+    @Test
+    void exampleMatcher() {
+
+        ExampleMatcher exampleMatcher = ExampleMatcher.matching()
+                .withMatcher("lrgclasCd", GenericPropertyMatchers.ignoreCase())
+                .withMatcher("smlclasCd", GenericPropertyMatchers.ignoreCase())
+                .withMatcher("smlclasCdNm", GenericPropertyMatchers.contains());
+
+        Smlclas smclasCondition = new Smlclas();
+        smclasCondition.setSmlclasCdNm("WWW");
+
+        List<Smlclas> codes = smallCodeRepository.findAll(Example.of(smclasCondition, exampleMatcher));
+        assertThat(codes).isNotNull().size().isGreaterThan(0);
+    }
+
+    @Test
+    void fetchJoin() {
+        List<Lrgclas> codes = largeCodeRepository.findAllWithSmlclass();
+        assertNotNull(codes);
+    }
+
+    @Test
+    void entityGraph() {
+        Lrgclas code = largeCodeRepository.findWithSmlclassByLrgclasCd("WWW01").orElse(null);
+        assertNotNull(code);
+    }
 }

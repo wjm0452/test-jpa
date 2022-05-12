@@ -50,10 +50,6 @@ public class BoardRepositoryImpl extends QuerydslRepositorySupport implements Bo
 
     public List<Tuple> findQuery2() {
 
-        // PathBuilderFactory pbf = new PathBuilderFactory();
-        // PathBuilder<Board> board = getBuilder();
-        // PathBuilder<BoardAdmin> boardAdmin = pbf.create(BoardAdmin.class);
-
         PathBuilder<Board> board = new PathBuilder<>(Board.class, "b");
         PathBuilder<BoardAdmin> boardAdmin = new PathBuilder<>(BoardAdmin.class, "ba");
 
