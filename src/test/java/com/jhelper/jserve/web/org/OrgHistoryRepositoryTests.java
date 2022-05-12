@@ -44,4 +44,12 @@ public class OrgHistoryRepositoryTests {
 
         assertThat(histories).isNotNull().size().isGreaterThan(0);
     }
+
+    @Test
+    void queryDsl3() {
+
+        List<Tuple> histories = orgHistoryRepository.findOrgCdAndChangedCount();
+
+        assertThat(histories).isNotNull().size().isGreaterThan(0);
+    }
 }

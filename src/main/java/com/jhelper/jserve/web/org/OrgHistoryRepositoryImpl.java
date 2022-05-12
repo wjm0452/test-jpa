@@ -8,6 +8,7 @@ import com.jhelper.jserve.web.entity.Org;
 import com.jhelper.jserve.web.entity.OrgHistory;
 import com.querydsl.core.Tuple;
 import com.querydsl.core.types.dsl.PathBuilder;
+import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQuery;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ public class OrgHistoryRepositoryImpl implements OrgHistoryRepositoryCustom {
         PathBuilder<OrgHistory> oh = new PathBuilder<>(OrgHistory.class, "oh");
 
         JPAQuery<OrgHistory> query = new JPAQuery<>(entityManager);
+
         return query.select(oh)
                 .from(oh)
                 .where(oh.getString("orgCd").isNotNull(),
@@ -35,7 +37,11 @@ public class OrgHistoryRepositoryImpl implements OrgHistoryRepositoryCustom {
         PathBuilder<Org> o = new PathBuilder<>(Org.class, "o");
 
         JPAQuery<Tuple> query = new JPAQuery<>(entityManager);
-        return query.select(oh.getString("orgCd"), oh.getString("orgNm"))
+
+        return query
+                .select(
+                        oh.getString("orgCd"),
+                        oh.getString("orgNm"))
                 .from(oh)
                 .join(o)
                 .on(oh.getString("orgCd").eq(o.getString("orgCd")))
@@ -44,4 +50,23 @@ public class OrgHistoryRepositoryImpl implements OrgHistoryRepositoryCustom {
                                 .or(o.getString("orgNm").like("%" + orgHistory.getOrgNm() + "%")))
                 .fetch();
     }
+
+    public List<Tuple> findOrgCdAndChangedCount() {
+
+        PathBuilder<Org> o = new PathBuilder<>(Org.class, "o");
+        PathBuilder<OrgHistory> oh = new PathBuilder<>(OrgHistory.class, "oh");
+
+        JPAQuery<Tuple> query = new JPAQuery<>(entityManager);
+
+        return query
+                .select(o.getString("orgCd"),
+                        oh.count().as("changedCount"))
+                .from(o)
+                .leftJoin(oh)
+                .on(o.getString("orgCd").eq(oh.getString("orgCd")))
+                .groupBy(o.getString("orgCd"))
+                .fetch();
+    }
+
+    // JPAExpressions - inline view 사용시
 }

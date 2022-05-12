@@ -9,4 +9,6 @@ public interface OrgHistoryRepositoryCustom {
     public List<OrgHistory> findAll(OrgHistory orgHistory);
 
     public List<Tuple> findAll2(OrgHistory orgHistory);
+
+    public List<Tuple> findOrgCdAndChangedCount();
 }
