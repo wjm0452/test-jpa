@@ -3,13 +3,23 @@ package com.jhelper.jserve.web.entity;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.JoinColumnOrFormula;
+import org.hibernate.annotations.JoinColumnsOrFormulas;
+import org.hibernate.annotations.JoinFormula;
+import org.hibernate.annotations.Where;
+import org.hibernate.annotations.WhereJoinTable;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -39,6 +49,13 @@ public class Board extends BaseEntity {
     private String pfcUseYn;
     private String clsdDispYn;
     private String replyPmssYn;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumnsOrFormulas({
+            @JoinColumnOrFormula(formula = @JoinFormula(value = "'USE_YN'", referencedColumnName = "lrgclasCd")),
+            @JoinColumnOrFormula(column = @JoinColumn(name = "blbdUseYn", referencedColumnName = "smlclasCd", insertable = false, updatable = false))
+    })
+    private Smlclas blbdUse;
 
     @ToString.Exclude
     @MapsId("blbdId")

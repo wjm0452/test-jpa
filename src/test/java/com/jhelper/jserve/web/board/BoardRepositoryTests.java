@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import lombok.extern.slf4j.Slf4j;
 
-@Transactional
+// @Transactional
 @SpringBootTest
 @Slf4j
 public class BoardRepositoryTests {
@@ -130,5 +130,14 @@ public class BoardRepositoryTests {
     void queryDsl2() {
         List<Tuple> boardAdmins = boardRepository.findQuery2();
         assertThat(boardAdmins).hasSize(4);
+    }
+    @Test
+    void commonCode() {
+
+        List<Board> boards = boardRepository.findAll();
+        Board board = boards.get(0);
+        assertThat(board.getBlbdUseYn()).isEqualTo("Y");
+        assertThat(board.getBlbdUse().getSmlclasCd()).isEqualTo("Y");
+        assertThat(board.getBlbdUse().getSmlclasCdNm()).isEqualTo("사용");
     }
 }

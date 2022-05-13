@@ -42,6 +42,7 @@ public class CodeRepositoryTests {
     @DisplayName("before")
     void beforeCode() {
         log.info("before code");
+        
         String[] largeCodes = { "WWW01", "WWW02" };
 
         List<Lrgclas> lrgclasCds = Arrays.stream(largeCodes).map(largeCode -> {
@@ -87,6 +88,24 @@ public class CodeRepositoryTests {
                     .useYn("Y")
                     .build();
         }).collect(Collectors.toList());
+    }
+
+    @Test
+    void saveUseYn() {
+
+        Smlclas y = Smlclas.builder().lrgclasCd("USE_YN").smlclasCd("Y").smlclasCdNm("사용").useYn("Y")
+                .srtSeq(1).build();
+        Smlclas n = Smlclas.builder().lrgclasCd("USE_YN").smlclasCd("N").smlclasCdNm("미사용").useYn("Y")
+                .srtSeq(1).build();
+
+        Lrgclas useYn = Lrgclas.builder().lrgclasCd("USE_YN").lrgclasCdNm("사용여부").useYn("Y").cdDv("SYS")
+                .smlclass(new ArrayList<>()).build();
+
+        useYn.getSmlclass().add(y);
+        useYn.getSmlclass().add(n);
+
+        largeCodeRepository.save(useYn);
+
     }
 
     @Test
